@@ -31,14 +31,7 @@ class AlienInvasion:
             # Watch for keyboard and mouse events
             self._check_events()
             self.ship.update()
-            self.bullets.update()
-
-            # Delete bullets that go off screen
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
-            print(len(self.bullets))
-
+            self._update_bullets()
             self._update_screen()
 
     def _check_events(self):
@@ -74,6 +67,15 @@ class AlienInvasion:
             self.ship.moving_right = False
         if event.key == pygame.K_LEFT:
             self.ship.moving_left = False
+
+    def _update_bullets(self):
+        """Update bullet positions and delete old bullets"""
+        self.bullets.update()
+
+        # Delete bullets that go off screen
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
 
     def _update_screen(self):
         """Update images on the screen, flip to new screen"""

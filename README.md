@@ -10,5 +10,5 @@ In Alien Invasion, the player controls a rocket ship that appears at the bottom 
 
 To play, have Python installed open the terminal and type
 ```
-python3 -m alien_invasion.py
+python3 alien_invasion.py
 ```

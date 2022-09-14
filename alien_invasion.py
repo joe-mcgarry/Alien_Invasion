@@ -38,7 +38,7 @@ class AlienInvasion:
                 if bullet.rect.bottom <= 0:
                     self.bullets.remove(bullet)
             print(len(self.bullets))
-            
+
             self._update_screen()
 
     def _check_events(self):
@@ -64,8 +64,9 @@ class AlienInvasion:
 
     def _fire_bullet(self):
         """Creates new bullet and add it to bullet group"""
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
 
     def _check_keyup_events(self, event):
         """Respond to key releases"""

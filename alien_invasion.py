@@ -6,6 +6,7 @@ from ship import Ship
 from bullet import Bullet
 from alien import Alien
 from game_stats import GameStats
+from button import Button
 
 
 class AlienInvasion:
@@ -31,6 +32,8 @@ class AlienInvasion:
         self.aliens = pygame.sprite.Group()
 
         self._create_fleet()
+
+        self.play_button = Button(self, "Play")
 
     def run_game(self):
         """Start the main game loop"""
@@ -120,7 +123,7 @@ class AlienInvasion:
             if alien.rect.bottom >= screen_rect.bottom:
                 self._ship_hit()
                 break
-    
+
     def _change_fleet_direction(self):
         """Drop the fleet 1 row and change direction"""
         for alien in self.aliens.sprites():
@@ -166,7 +169,7 @@ class AlienInvasion:
 
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
             self._ship_hit()
-        
+
         self._check_aliens_bottom()
 
     def _update_screen(self):
@@ -176,6 +179,9 @@ class AlienInvasion:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
+
+        if not self.stats.game_active:
+            self.play_button.draw_button()
 
         # Make most recently drawn screen visible
         pygame.display.flip()

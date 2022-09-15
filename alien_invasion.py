@@ -3,6 +3,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from alien import Alien
 
 
 class AlienInvasion:
@@ -24,6 +25,9 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+
+        self._create_fleet()
 
     def run_game(self):
         """Start the main game loop"""
@@ -54,6 +58,11 @@ class AlienInvasion:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
+
+    def _create_fleet(self):
+        """Creates the fleet of aliens"""
+        alien = Alien(self)
+        self.aliens.add(alien)
 
     def _fire_bullet(self):
         """Creates new bullet and add it to bullet group"""

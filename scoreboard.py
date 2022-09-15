@@ -1,10 +1,13 @@
 import pygame.font
+from pygame.sprite import Group
+from ship import Ship
 
 
 class Scoreboard:
     """A class to report scoring information"""
 
     def __init__(self, game):
+        self.game = game
         self.screen = game.screen
         self.screen_rect = self.screen.get_rect()
         self.settings = game.settings
@@ -15,6 +18,7 @@ class Scoreboard:
         self.prep_score()
         self.prep_high_score()
         self.prep_level()
+        self.prep_ships()
 
     def prep_score(self):
         """Turns score into a rendered image"""

@@ -58,3 +58,11 @@ class Scoreboard:
         self.level_rect = self.level_image.get_rect()
         self.level_rect.right = self.score_rect.right
         self.level_rect.top = self.score_rect.bottom + 10
+
+    def prep_ships(self):
+        self.ships = Group()
+        for ship_number in range(self.stats.ships_left):
+            ship = Ship(self.game)
+            ship.rect.x = 10 + ship_number * ship.rect.width
+            ship.rect.y = 10
+            self.ships.add(ship)

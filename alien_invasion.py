@@ -37,21 +37,25 @@ class AlienInvasion:
         while True:
             # Watch for keyboard and mouse events
             self._check_events()
-            self.ship.update()
-            self._update_bullets()
-            self._update_aliens()
+            if self.stats.game_active:
+                self.ship.update()
+                self._update_bullets()
+                self._update_aliens()
             self._update_screen()
 
     def _ship_hit(self):
         """Respond to ship being hit by alien"""
-        self.stats.ships_left -= 1
-        self.aliens.empty()
-        self.bullets.empty()
+        if self.stats.ships_left > 0:
+            self.stats.ships_left -= 1
+            self.aliens.empty()
+            self.bullets.empty()
 
-        self._create_fleet()
-        self.ship.center_ship()
+            self._create_fleet()
+            self.ship.center_ship()
 
-        sleep(0.5)
+            sleep(0.5)
+        else:
+            self.stats.game_active = False
 
     def _check_events(self):
         """Respond to keypresses and mouse events"""

@@ -84,6 +84,8 @@ class AlienInvasion:
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
+        elif event.key == pygame.K_p:
+            self._start_game()
 
     def _create_fleet(self):
         """Creates the fleet of aliens"""
@@ -181,15 +183,19 @@ class AlienInvasion:
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.stats.game_active:
             self.stats.reset_stats()
-            self.stats.game_active = True
+            self._start_game()
 
-            # Removes remaining bullets and aliens
-            self.aliens.empty()
-            self.bullets.empty()
-            # Create new fleet and center ship
-            self._create_fleet()
-            self.ship.center_ship()
-            pygame.mouse.set_visible(False)
+    def _start_game(self):
+        """Starts the game"""
+        self.stats.game_active = True
+
+        # Removes remaining bullets and aliens
+        self.aliens.empty()
+        self.bullets.empty()
+        # Create new fleet and center ship
+        self._create_fleet()
+        self.ship.center_ship()
+        pygame.mouse.set_visible(False)
 
     def _update_screen(self):
         """Update images on the screen, flip to new screen"""

@@ -59,6 +59,7 @@ class AlienInvasion:
             sleep(0.5)
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
     def _check_events(self):
         """Respond to keypresses and mouse events"""
@@ -188,6 +189,7 @@ class AlienInvasion:
             # Create new fleet and center ship
             self._create_fleet()
             self.ship.center_ship()
+            pygame.mouse.set_visible(False)
 
     def _update_screen(self):
         """Update images on the screen, flip to new screen"""
